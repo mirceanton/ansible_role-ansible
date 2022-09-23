@@ -18,3 +18,4 @@ Fixes # (issue)
 - [ ] All tests (CI and/or manual) have passed
 - [ ] Source and Target branches have been verified
 - [ ] `Squash and Merge` is selected as opposed to regular merge
+- [ ] Source branch has been removed after the merge
