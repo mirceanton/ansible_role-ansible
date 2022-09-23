@@ -1,0 +1,54 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: true
+
+  vars_files:
+    - ../../defaults/main.yml
+    - ../../vars/main.yml
+
+  pre_tasks:
+    - name: Check packages
+      package_facts:
+        manager: auto
+
+  tasks:
+    - name: Check if apt packages are installed
+      ansible.builtin.assert:
+        that: "'{{ item }}' in ansible_facts.packages"
+      loop: "{{ apt_default }}"
+
+    - name: Check if ansible is installed
+      block:
+        - name: Try running ansible
+          ansible.builtin.command: "{{ ansible_pip_package }} --version"
+          register: __command__
+          changed_when: false
+
+        - name: Check command output
+          ansible.builtin.assert:
+            that: __command__.rc == 0
+
+    - name: Check if ansible-lint is installed
+      block:
+        - name: Try running ansible
+          ansible.builtin.command: "{{ ansible_lint_package }} --version"
+          register: __command__
+          changed_when: false
+
+        - name: Check command output
+          ansible.builtin.assert:
+            that: __command__.rc == 0
+
+    - name: Check if molecule is installed
+      block:
+        - name: Try running ansible
+          ansible.builtin.command: "{{ molecule_package }} --version"
+          register: __command__
+          changed_when: false
+
+        - name: Check command output
+          ansible.builtin.assert:
+            that: __command__.rc == 0

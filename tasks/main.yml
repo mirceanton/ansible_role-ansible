@@ -1,0 +1,45 @@
+---
+- name: Install required apt packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: "{{ apt_state }}"
+    update_cache: true
+    cache_valid_time: 3600
+  loop: "{{ apt_default }}"
+
+- name: Install Ansible
+  ansible.builtin.pip:
+    name: "{{ ansible_pip_package }}"
+    state: "{{ pip_state }}"
+
+- name: Install ansible-lint
+  ansible.builtin.pip:
+    name: "{{ ansible_lint_package }}"
+    state: "{{ pip_state }}"
+  when: install_lint
+
+- name: Install molecule
+  ansible.builtin.pip:
+    name: "{{ molecule_package }}[ {% if install_lint %}lint,{% endif %}{{ molecule_driver }} ]"
+    state: "{{ pip_state }}"
+  when:
+    - install_molecule
+    - molecule_driver is defined
+
+- name: Install additional apt packages
+  ansible.builtin.apt:
+    name: "{{ item.name }}"
+    state: "{{ apt_state }}"
+  loop: "{{ apt_additional }}"
+  when:
+    - apt_additional is defined
+    - apt_additional | length > 0
+
+- name: Install additional pip packages
+  ansible.builtin.pip:
+    name: "{{ item.name }}"
+    state: "{{ pip_state }}"
+  loop: "{{ pip_additional }}"
+  when:
+    - pip_additional is defined
+    - pip_additional | length > 0

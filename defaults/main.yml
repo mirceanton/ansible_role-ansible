@@ -1,0 +1,14 @@
+---
+# The default state of the packages to install
+apt_state: present
+pip_state: present
+
+# List of apt packages absolutely required to use Ansible
+apt_default:
+  - python3-pip
+  - sshpass
+
+# Names for pip packages
+ansible_pip_package: ansible
+ansible_lint_package: ansible-lint
+molecule_package: molecule

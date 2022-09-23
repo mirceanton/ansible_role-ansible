@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+
+  tasks:
+    - name: "Include mirceanton.ansible"
+      ansible.builtin.include_role:
+        name: "mirceanton.ansible"

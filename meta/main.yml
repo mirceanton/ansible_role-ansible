@@ -1,0 +1,30 @@
+galaxy_info:
+  author: Mircea-Pavel ANTON
+  namespace: mirceanton
+  role_name: ansible
+  description: A role that install Ansible as well as some useful additional packages.
+  # company: N/A
+
+  # If the issue tracker for your role is not on github, uncomment the
+  # next line and provide a value
+  # issue_tracker_url: http://example.com/issue/tracker
+
+  license: license (MIT)
+  min_ansible_version: '2.1'
+  standalone: true
+
+  platforms:
+    - name: Debian
+      versions:
+        - buster    # 10
+        - bullseye  # 11
+    - name: Ubuntu
+      versions:
+        - focal   # 20.04
+
+  galaxy_tags:
+    - ansible
+    - molecule
+    - lint
+
+dependencies: []

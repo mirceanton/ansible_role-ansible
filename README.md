@@ -1,2 +1,53 @@
-# ansible-role_ansible
-An Ansible role that installs and configures Ansible as well as commonly used/required packages.
+Ansible Role: Ansible
+=====================
+
+An Ansible role that installs... well... Ansible... (as well as commonly used packages)
+
+Requirements
+------------
+
+N/A
+
+Role Variables
+--------------
+
+|      Variable      |     Type     | Default  |                Description                 |
+| :----------------: | :----------: | :------: | :----------------------------------------: |
+|   `install_lint`   |     bool     |  `true`  |   Whether or not to install ansible-lint   |
+| `install_molecule` |     bool     |  `true`  |     Whether or not to install molecule     |
+| `molecule_driver`  |    string    | `docker` |  Which driver(s) to install for molecule   |
+|  `apt_additional`  | list(string) |   `[]`   | List of additional apt packages to install |
+|  `pip_additional`  | list(string) |   `[]`   | List of additional pip packages to install |
+
+To check which packages are installed by default, take a look in the [defaults](defaults/main.yml) file.
+
+Dependencies
+------------
+
+N/A
+
+Example Playbook
+----------------
+
+``` yml
+---
+- hosts: all
+  remote_user: root
+
+  roles:
+    - role: mirceanton.ansible
+      vars:
+        pip_additional: [ lxml, docker, jsondiff ]
+        install_lint: false
+        install_molecule: false
+```
+
+License
+-------
+
+MIT
+
+Author Information
+------------------
+
+A role developed by [Mircea-Pavel ANTON](https://www.mirceanton.com).
