@@ -1,2 +1,6 @@
 ---
-# vars file for ansible
+install_lint: true      # Whether or not to install ansible-lint
+install_molecule: true  # Whether or not to install molecule
+molecule_driver: docker # Which driver to install for molecule
+apt_additional: []      # List of additional apt packages to install
+pip_additional: []      # List of additional pip packages to install
