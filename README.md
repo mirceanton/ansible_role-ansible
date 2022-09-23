@@ -1,38 +1,53 @@
-Role Name
-=========
+Ansible Role: Ansible
+=====================
 
-A brief description of the role goes here.
+An Ansible role that installs... well... Ansible... (as well as commonly used packages)
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+N/A
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+|      Variable      |     Type     | Default  |                Description                 |
+| :----------------: | :----------: | :------: | :----------------------------------------: |
+|   `install_lint`   |     bool     |  `true`  |   Whether or not to install ansible-lint   |
+| `install_molecule` |     bool     |  `true`  |     Whether or not to install molecule     |
+| `molecule_driver`  |    string    | `docker` |  Which driver(s) to install for molecule   |
+|  `apt_additional`  | list(string) |   `[]`   | List of additional apt packages to install |
+|  `pip_additional`  | list(string) |   `[]`   | List of additional pip packages to install |
+
+To check which packages are installed by default, take a look in the [defaults](defaults/main.yml) file.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+N/A
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+``` yml
+---
+- hosts: all
+  remote_user: root
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+  roles:
+    - role: mirceanton.ansible
+      vars:
+        pip_additional: [ lxml, docker, jsondiff ]
+        install_lint: false
+        install_molecule: false
+```
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+A role developed by [Mircea-Pavel ANTON](https://www.mirceanton.com).
