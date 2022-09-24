@@ -16,11 +16,11 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - buster    # 10
         - bullseye  # 11
     - name: Ubuntu
       versions:
-        - focal   # 20.04
+        - focal     # 20.04
+        - jammy     # 22.04
 
   galaxy_tags:
     - ansible
