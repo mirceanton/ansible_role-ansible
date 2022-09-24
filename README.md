@@ -37,9 +37,9 @@ Example Playbook
   roles:
     - role: mirceanton.ansible
       vars:
-        pip_additional: [ lxml, docker, jsondiff ]
-        install_lint: false
-        install_molecule: false
+        ansible_pip_additional: [ lxml, docker, jsondiff ]
+        ansible_lint_install: false
+        ansible_molecule_install: false
 ```
 
 License
