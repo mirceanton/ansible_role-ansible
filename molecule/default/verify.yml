@@ -21,15 +21,9 @@
       loop: "{{ ansible_apt_prereq }}"
 
     - name: Check if commands are working
-      block:
-        - name: Try running ansible
-          ansible.builtin.command: "{{ item }} --version"
-          register: __command__
-          changed_when: false
-
-        - name: Check command output
-          ansible.builtin.assert:
-            that: __command__.rc == 0
+      ansible.builtin.command: "{{ item }} --version"
+      register: __command__
+      changed_when: false
       loop:
         - "{{ ansible_pip_package }}"
         - "{{ ansible_lint_package }}"
