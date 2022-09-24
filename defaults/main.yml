@@ -7,6 +7,7 @@ ansible_pip_state: present
 ansible_apt_prereq:
   - python3-pip
   - sshpass
+  - libffi-dev
 
 # Names for pip packages
 ansible_pip_package: ansible
