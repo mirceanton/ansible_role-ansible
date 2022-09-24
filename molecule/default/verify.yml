@@ -15,40 +15,16 @@
         manager: auto
 
   tasks:
-    - name: Check if apt packages are installed
+    - name: Check if prerequisites are installed
       ansible.builtin.assert:
         that: "'{{ item }}' in ansible_facts.packages"
-      loop: "{{ apt_default }}"
+      loop: "{{ ansible_apt_prereq }}"
 
-    - name: Check if ansible is installed
-      block:
-        - name: Try running ansible
-          ansible.builtin.command: "{{ ansible_pip_package }} --version"
-          register: __command__
-          changed_when: false
-
-        - name: Check command output
-          ansible.builtin.assert:
-            that: __command__.rc == 0
-
-    - name: Check if ansible-lint is installed
-      block:
-        - name: Try running ansible
-          ansible.builtin.command: "{{ ansible_lint_package }} --version"
-          register: __command__
-          changed_when: false
-
-        - name: Check command output
-          ansible.builtin.assert:
-            that: __command__.rc == 0
-
-    - name: Check if molecule is installed
-      block:
-        - name: Try running ansible
-          ansible.builtin.command: "{{ molecule_package }} --version"
-          register: __command__
-          changed_when: false
-
-        - name: Check command output
-          ansible.builtin.assert:
-            that: __command__.rc == 0
+    - name: Check if commands are working
+      ansible.builtin.command: "{{ item }} --version"
+      register: __command__
+      changed_when: false
+      loop:
+        - "{{ ansible_pip_package }}"
+        - "{{ ansible_lint_package }}"
+        - "{{ ansible_molecule_package }}"
