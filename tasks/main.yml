@@ -28,7 +28,7 @@
 
 - name: Install additional apt packages
   ansible.builtin.apt:
-    name: "{{ item.name }}"
+    name: "{{ item }}"
     state: "{{ ansible_apt_state }}"
   loop: "{{ ansible_apt_additional }}"
   when:
@@ -37,7 +37,7 @@
 
 - name: Install additional pip packages
   ansible.builtin.pip:
-    name: "{{ item.name }}"
+    name: "{{ item }}"
     state: "{{ ansible_pip_state }}"
   loop: "{{ ansible_pip_additional }}"
   when:

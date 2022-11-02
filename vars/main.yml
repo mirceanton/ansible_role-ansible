@@ -9,7 +9,7 @@ ansible_molecule_install: true
 ansible_molecule_driver: docker
 
 # List of additional apt packages to install
-ansible_apt_additional: []
+# ansible_apt_additional: []
 
 # List of additional pip packages to install
-ansible_pip_additional: []
+# ansible_pip_additional: []
